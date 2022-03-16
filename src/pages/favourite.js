@@ -7,12 +7,12 @@ function Favourite() {
   return (
     <section className="section">
       <h1 className="text-2xl font-medium text-white">Favourites</h1>
-      <div className="mt-5 grid gap-2 md:grid-cols-8">
+      <div className="mt-5 grid grid-cols-2 gap-2 md:grid-cols-8">
         {favourites.value.map((favouriteBook) => (
           <BookCard
             book={favouriteBook}
             key={favouriteBook.id}
-            className="w-auto"
+            className="!w-auto"
           />
         ))}
       </div>

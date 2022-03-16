@@ -97,6 +97,10 @@ function Home() {
               length={10}
               className="mr-2 !w-[150px] flex-shrink-0 md:!w-[200px]"
             />
+          ) : careerAndBusinessBooks.isError ? (
+            <span className="text-white">
+              {careerAndBusinessBooks.error.data}
+            </span>
           ) : (
             careerAndBusinessBooks.data.map((book) => {
               return <BookCard book={book} key={book.id} />;
@@ -139,6 +143,10 @@ function Home() {
               length={10}
               className="mr-2 !w-[150px] flex-shrink-0 md:!w-[200px]"
             />
+          ) : invesmentAndFinanceBooks.isError ? (
+            <span className="text-white">
+              {invesmentAndFinanceBooks.error.data}
+            </span>
           ) : (
             invesmentAndFinanceBooks.data.map((book) => {
               return <BookCard book={book} key={book.id} />;
@@ -181,6 +189,10 @@ function Home() {
               length={10}
               className="mr-2 !w-[150px] flex-shrink-0 md:!w-[200px]"
             />
+          ) : societyAndPoliticsBooks.isError ? (
+            <span className="text-white">
+              {societyAndPoliticsBooks.error.data}
+            </span>
           ) : (
             societyAndPoliticsBooks.data.map((book) => {
               return <BookCard book={book} key={book.id} />;

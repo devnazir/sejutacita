@@ -66,18 +66,19 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
-      <div className="">
+      <div>
         <FaSearch
           className="flex cursor-pointer md:hidden"
           onClick={() => setShowSearchInput(!showSearchInput)}
         />
-        {(showSearchInput || width >= 768) && (
-          <Input
-            placeholder="Search Books"
-            type="text"
-            className="absolute right-[20px] left-[20px] top-[80px] bg-white p-2 text-black transition-all duration-100 placeholder:text-black  md:static md:flex md:w-[240px] md:bg-transparent md:p-0 md:text-white-opacity-[0.8] md:focus:w-[360px]"
-          />
-        )}
+        <Input
+          placeholder="Search Books"
+          type="text"
+          id="search-nav"
+          className={`absolute right-[20px] left-[20px] top-[80px] bg-white p-2 text-black transition-all duration-100 placeholder:text-black  md:static md:flex md:w-[240px] md:bg-transparent md:p-0 md:text-white-opacity-[0.8] md:focus:w-[360px] ${
+            width >= 768 || showSearchInput ? "block" : "hidden"
+          }`}
+        />
       </div>
     </nav>
   );
