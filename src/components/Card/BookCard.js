@@ -33,6 +33,11 @@ const BookCard = ({ book, className, ...props }) => {
         }`}
         onClick={handleClickFavourite}
       />
+
+      <div className="mt-3 flex flex-col text-white">
+        <span className="text-md font-semibold">{book.title}</span>
+        <span className="text-xs">{book.authors.join(",")}</span>
+      </div>
     </div>
   );
 };

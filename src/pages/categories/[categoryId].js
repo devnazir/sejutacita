@@ -1,5 +1,6 @@
 import BookCard from "components/Card/BookCard";
 import Pagination from "components/Pagination";
+import Skeleton from "components/Skeleton";
 import { useState } from "react";
 import { useParams } from "react-router";
 import { useGetBooksQuery } from "services/books.service";
@@ -15,6 +16,8 @@ function CategoryById() {
     size: 20,
   });
 
+  const { isError, error } = books;
+
   const categoryName = categories.data?.find(
     (category) => category.id === Number(categoryId)
   )?.name;
@@ -24,22 +27,24 @@ function CategoryById() {
       <h1 className="text-2xl font-medium text-white">{categoryName}</h1>
       <div className="mt-5 grid grid-cols-2 gap-2 md:grid-cols-8">
         {books.isLoading || books.isFetching ? (
-          <span className="text-white">Loading...</span>
+          <Skeleton length={10} className="!w-auto" />
+        ) : isError ? (
+          <span className="text-white">{error.data}</span>
         ) : (
-          books?.data?.map((book) => {
-            return <BookCard book={book} className="!w-auto"/>;
-          }) ?? <></>
+          books.data.map((book) => {
+            return <BookCard book={book} key={book.id} className="!w-auto" />;
+          })
         )}
       </div>
       <div className="mt-10 flex text-white">
         <Pagination
           className="m-auto"
           onClickPrev={() =>
-            setCurrentPage((prev) => (prev <= 1 ? 1 : prev - 1))
+            setCurrentPage((prev) => (prev <= 0 ? 0 : prev - 1))
           }
           onClickNext={() => setCurrentPage((prev) => prev + 1)}
         >
-          {currentPage}
+          {currentPage + 1}
         </Pagination>
       </div>
     </section>

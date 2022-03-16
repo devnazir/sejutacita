@@ -1,5 +1,6 @@
 import BookCard from "components/Card/BookCard";
 import Pagination from "components/Pagination";
+import Skeleton from "components/Skeleton";
 import { Fragment, useState } from "react";
 import { useNavigate } from "react-router";
 import { useGetBooksQuery } from "services/books.service";
@@ -9,20 +10,20 @@ function Home() {
 
   const [page, setPage] = useState({
     careerAndBusinessBooks: {
-      currentPage: 1,
+      currentPage: 0,
     },
 
     invesmentAndFinanceBooks: {
-      currentPage: 2,
+      currentPage: 1,
     },
 
     societyAndPoliticsBooks: {
-      currentPage: 3,
+      currentPage: 2,
     },
   });
 
   const careerAndBusinessBooks = useGetBooksQuery({
-    categoryId: 1,
+    categoryId: 11,
     size: 15,
     page: page.careerAndBusinessBooks.currentPage,
   });
@@ -43,12 +44,10 @@ function Home() {
     setPage((prev) => ({
       ...prev,
       [key]: {
-        currentPage: prev[key].currentPage <= 1 ? 1 : prev[key].currentPage - 1,
+        currentPage: prev[key].currentPage <= 0 ? 0 : prev[key].currentPage - 1,
       },
     }));
   };
-
-  console.log(careerAndBusinessBooks);
 
   const handleClickNextBooksSection = ({ key }) => {
     setPage((prev) => ({
@@ -88,13 +87,16 @@ function Home() {
               })
             }
           >
-            {page.careerAndBusinessBooks.currentPage}
+            {page.careerAndBusinessBooks.currentPage + 1}
           </Pagination>
         </div>
         <div className="mt-5 flex w-full snap-x overflow-x-scroll">
           {careerAndBusinessBooks.isLoading ||
           careerAndBusinessBooks.isFetching ? (
-            <span>Loading..</span>
+            <Skeleton
+              length={10}
+              className="mr-2 !w-[150px] flex-shrink-0 md:!w-[200px]"
+            />
           ) : (
             careerAndBusinessBooks.data.map((book) => {
               return <BookCard book={book} key={book.id} />;
@@ -127,13 +129,16 @@ function Home() {
               })
             }
           >
-            {page.invesmentAndFinanceBooks.currentPage}
+            {page.invesmentAndFinanceBooks.currentPage + 1}
           </Pagination>
         </div>
         <div className="mt-5 flex w-full snap-x overflow-x-scroll">
           {invesmentAndFinanceBooks.isLoading ||
           invesmentAndFinanceBooks.isFetching ? (
-            <span>Loading..</span>
+            <Skeleton
+              length={10}
+              className="mr-2 !w-[150px] flex-shrink-0 md:!w-[200px]"
+            />
           ) : (
             invesmentAndFinanceBooks.data.map((book) => {
               return <BookCard book={book} key={book.id} />;
@@ -166,13 +171,16 @@ function Home() {
               })
             }
           >
-            {page.societyAndPoliticsBooks.currentPage}
+            {page.societyAndPoliticsBooks.currentPage + 1}
           </Pagination>
         </div>
         <div className="mt-5 flex w-full snap-x overflow-x-scroll">
           {societyAndPoliticsBooks.isLoading ||
           societyAndPoliticsBooks.isFetching ? (
-            <span>Loading..</span>
+            <Skeleton
+              length={10}
+              className="mr-2 !w-[150px] flex-shrink-0 md:!w-[200px]"
+            />
           ) : (
             societyAndPoliticsBooks.data.map((book) => {
               return <BookCard book={book} key={book.id} />;

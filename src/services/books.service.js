@@ -11,7 +11,6 @@ export const booksApi = createApi({
     getBooks: builder.query({
       query: (args = "") => ({
         url: `fee-assessment-books`,
-        headers: {},
         params: args,
       }),
     }),
